@@ -1,0 +1,2 @@
+bucket_name = "papertray-inbox-prod"
+aws_region  = "eu-west-1"
