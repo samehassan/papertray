@@ -16,6 +16,7 @@ class Settings:
     region: str
     bucket: str
     prefix: str
+    notify_url: str
 
 
 def load_settings() -> Settings:
@@ -24,6 +25,7 @@ def load_settings() -> Settings:
     region = os.environ.get("AWS_DEFAULT_REGION", "eu-west-1").strip()
     bucket = os.environ.get("PAPERTRAY_BUCKET", "papertray-inbox-prod").strip()
     prefix = os.environ.get("PAPERTRAY_PREFIX", "inbox/").strip()
+    notify_url = os.environ.get("PAPERTRAY_NOTIFY_URL", "").strip()
     if not prefix.endswith("/"):
         prefix += "/"
 
@@ -36,4 +38,5 @@ def load_settings() -> Settings:
         region=region,
         bucket=bucket,
         prefix=prefix,
+        notify_url=notify_url,
     )

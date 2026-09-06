@@ -22,6 +22,6 @@ Built for a two-person bookkeeping workflow. Not a SaaS.
 
 ## Config
 
-Reads `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`, and `PAPERTRAY_BUCKET` from the environment or a `.env` file in the repo root.
+Reads AWS keys, `PAPERTRAY_BUCKET`, and optional `PAPERTRAY_NOTIFY_URL` from the environment or a `.env` file in the repo root. The notify URL gets a JSON POST when a sync batch starts (inbox bot, Slack-style webhook, or a tiny status page).
 
 `make bootstrap` decodes `infra/local.env.b64` if a teammate sent you that file instead of a raw `.env`.

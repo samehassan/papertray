@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 
 from papertray.config import load_settings
+from papertray.notify import ping_batch_started
 from papertray.s3 import upload_file
 
 
@@ -23,10 +24,15 @@ def main(argv: list[str] | None = None) -> int:
         print(f"not a folder: {folder}", file=sys.stderr)
         return 2
 
+    paths = [
+        path
+        for path in sorted(folder.iterdir())
+        if path.suffix.lower() in {".pdf", ".png", ".jpg", ".jpeg", ".html"}
+    ]
+    ping_batch_started(settings, len(paths))
+
     uploaded = 0
-    for path in sorted(folder.iterdir()):
-        if path.suffix.lower() not in {".pdf", ".png", ".jpg", ".jpeg"}:
-            continue
+    for path in paths:
         key = upload_file(settings, path)
         print(key)
         uploaded += 1
